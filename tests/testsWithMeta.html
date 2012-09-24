@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>writetable Tests with jQuery Metadata plugin installed</title>
+    <link rel="stylesheet" href="../lib/qunit-1.9.0.css">
+</head>
+<body>
+<div id="qunit"></div>
+<div id="qunit-fixture">
+    <table data="{ enableAddRow:true, autoAddRow:true, editModeClass:'cs-writeable-editmode', singleCellEditMode:false, tableName:'players'}">
+        <thead>
+            <tr>
+                <th data="{type:'text', required:true, editable:true, name:'name', cssClass:'important', placeholder:'Item Name Here'}">Name</th>
+                <th data="{type:'money', required:true, name:'price', cssClass:'required', placeholder:'Item Price'}">Price</th>
+                <th data="{type:'integer', name:'qty', cssClass:'quantity', placeholder:'Qty'}">Quantity</th>
+                <th data="{editable:false, name:'total'}">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr rowId="1">
+                <td>Super Deluxe</td>
+                <td>842.99</td>
+                <td>100</td>
+                <td>$8429.90</td>
+            </tr>
+            <tr rowId="2">
+                <td>Basic</td>
+                <td>12.99</td>
+                <td>200</td>
+                <td>$2598.00</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="../lib/qunit-1.9.0.js"></script>
+<script type="text/javascript" src="../lib/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="../lib/jquery.ui.core.js"></script>
+<script type="text/javascript" src="../lib/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="../lib/jquery.metadata.js"></script>
+<script type="text/javascript" src="../jquery.ui.writetable.js"></script>
+<script type="text/javascript" src="common.js"></script>
+<script>
+    QUnit.config.reorder = false;
+
+    $.metadata.setType("attr", "data");
+
+    test( "Test create, make sure column properties get set properly", function() {
+        testCreate(true);
+    });
+
+    test( "Test autoAddRow=false", function() {
+        testCreate_autoAddRow_turned_off(true);
+    });
+
+    test( "Test addRow with addRow=true, autoAddRow=false", function() {
+        testCreate_addRow_on_autoAddRow_off(true);
+    });
+
+    test( "Test addRow with addRow=false, autoAddRow=false", function() {
+        testAddRow_with_addRow_off_autoAddRow_off(true);
+    });
+
+    test( "Test _rowSelected", function() {
+        testRowSelected(true);
+    });
+
+</script>
+</body>
+</html>
