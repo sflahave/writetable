@@ -78,13 +78,13 @@
 
 (function ($) {
 
-    $.widget("ui.cswritetable", {
+    $.widget("ui.writetable", {
         options:{
-            tableName:'cswriteable-data',
+            tableName:'writeable-data',
             singleCellEditMode:false,
             enableAddRow: true,
             autoAddRow: true,
-            editModeClass: "cs-writeable-editmode",
+            editModeClass: "writeable-editmode",
             columnDefaults: {
                 name: "",
                 type: 'text',

@@ -8,23 +8,29 @@
         table {
             margin: 100px auto;
             font-size: 14px;
-            font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
-            border-collapse:collapse;
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+        }
+
+        caption {
+            font-size: 1.5em;
+            font-weight: bold;
+            padding: 10px;
         }
 
         table, th, td {
-            font-size:1em;
-            border:1px solid #98bf21;
-            padding:3px 7px 2px 7px;
+            font-size: 1em;
+            border: 1px solid #98bf21;
+            padding: 3px 7px 2px 7px;
         }
 
         th {
-            font-size:1.1em;
-            text-align:left;
-            padding-top:5px;
-            padding-bottom:4px;
-            background-color:#A7C942;
-            color:#ffffff;
+            font-size: 1.1em;
+            text-align: left;
+            padding-top: 5px;
+            padding-bottom: 4px;
+            background-color: #A7C942;
+            color: #ffffff;
         }
 
         input[type="text"] {
@@ -49,60 +55,76 @@
         }
 
         input[type="text"].important {
-            background-color:#FFFFE5;
+            background-color: #FFFFE5;
+        }
+
+        .tableContainer {
+            position: relative;
+            width: 75%;
+            margin: 0 auto;
+        }
+
+        #addRow {
+            position: absolute;
+            top: 20px;
+            right: 200px;
         }
     </style>
 
 </head>
 <body>
 
-<table>
-    <thead>
-    <tr>
-        <th>Ticket Name</th>
-        <th>Price</th>
-        <th>Inventory Limit</th>
-        <th>Per-Order Limit</th>
-        <th>Fees</th>
-        <th>Revenue</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr rowId="1">
-        <td>Regular</td>
-        <td>$25.99</td>
-        <td>50</td>
-        <td>5</td>
-        <td>$2.15</td>
-        <td>$23.25</td>
-    </tr>
-    <tr rowId="2">
-        <td>Kids</td>
-        <td>$5.99</td>
-        <td>500</td>
-        <td>15</td>
-        <td>$2.15</td>
-        <td>$2.25</td>
-    </tr>
-    </tbody>
-</table>
+<div class="tableContainer">
+    <a id="addRow" href="#" onclick="addRow();">Add Row</a>
 
+
+    <table>
+        <caption>Players</caption>
+        <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Team</th>
+            <th>Position</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr rowId="1">
+            <td>Adrian</td>
+            <td>Peterson</td>
+            <td>Vikings</td>
+            <td>Running back</td>
+        </tr>
+        <tr rowId="2">
+            <td>Peyton</td>
+            <td>Manning</td>
+            <td>Broncos</td>
+            <td>Quarterback</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 <script type="text/javascript" src="../lib/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="../lib/jquery.ui.core.js"></script>
 <script type="text/javascript" src="../lib/jquery.ui.widget.js"></script>
 <script type="text/javascript" src="../jquery.ui.writetable.js"></script>
 <script type="text/javascript">
-    $("table").cswritetable({
-        tableName: 'tickets',
-        columns:[
-            {type:'text', required:true, editable:true, name:'name'},
-            {type:'money', required:true, editable:true, name:'price'},
-            {type:'integer', required:false, editable:true, name:'invLimit'},
-            {type:'integer', required:false, editable:true, name:'perOrderLimit'},
-            {editable: false, name:'fees'},
-            {editable: false, name:'revenue'}
-        ]
+    function addRow() {
+        $("table").writetable("addRow");
+        return false;
+    }
+
+    $(function () {
+        $("table").writetable({
+            tableName: 'players',
+            columns:[
+                {required:true, editable:true, name:'firstName', placeholder:'Required'},
+                {required:true, editable:true, name:'lastName', placeholder:'Required'},
+                {required:false, editable:true, name:'team'},
+                {required: false, name:'position'}
+            ]
+        });
     });
 </script>
 </body>

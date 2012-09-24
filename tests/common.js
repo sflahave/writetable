@@ -93,10 +93,10 @@ function testCreate(useMetadata) {
     var $fixture = $( "#qunit-fixture" );
 
     if(useMetadata) {
-        $("table", $fixture).cswritetable();  // column properties are set in the fixture; relying on autoAddRow=true
+        $("table", $fixture).writetable();  // column properties are set in the fixture; relying on autoAddRow=true
     }
     else {
-        $("table", $fixture).cswritetable({
+        $("table", $fixture).writetable({
             tableName: 'players',
             columns:getColumns()
         });
@@ -120,7 +120,7 @@ function testCreate_autoAddRow_turned_off(useMetadata) {
         $("table", $fixture).attr('data', "{tableName:'players', autoAddRow:false}");
     }
     else {
-        $("table", $fixture).cswritetable({
+        $("table", $fixture).writetable({
             tableName: 'players',
             autoAddRow:false,
             columns:getColumns()
@@ -138,10 +138,10 @@ function testCreate_addRow_on_autoAddRow_off(useMetadata) {
 
     if(useMetadata) {
         $("table", $fixture).attr('data', "{tableName:'players', enableAddRow:true, autoAddRow:false}");
-        $("table", $fixture).cswritetable();
+        $("table", $fixture).writetable();
     }
     else {
-        $("table", $fixture).cswritetable({
+        $("table", $fixture).writetable({
             tableName: 'players',
             enableAddRow:true,
             autoAddRow:false,
@@ -152,11 +152,11 @@ function testCreate_addRow_on_autoAddRow_off(useMetadata) {
     equal( $body.find("tr").size(), 2, "Table should have 2 rows after initializing with autoAddRow off" );
     verifyNumberOfEditableRows(0);
 
-    $("table", $fixture).cswritetable('addRow');  //call the addRow method
+    $("table", $fixture).writetable('addRow');  //call the addRow method
     equal( $("tr", $body).size(), 3, "Table should have 3 rows to after calling addRow()" );
     verifyNumberOfEditableRows(1);
 
-    $("table", $fixture).cswritetable('addRow');  //try to add another row; since nothing was added in the current new row, no new row should appear
+    $("table", $fixture).writetable('addRow');  //try to add another row; since nothing was added in the current new row, no new row should appear
     equal( $("tr", $body).size(), 3, "Table should still have 3 rows to after calling addRow() a second time, without adding any values" );
     verifyNumberOfEditableRows(1);
 }
@@ -172,11 +172,11 @@ function testAddRow_with_addRow_off_autoAddRow_off(useMetadata) {
         //initialize the plugin with metadata attributes
         $("table", $fixture).attr('data', "{tableName:'players', enableAddRow:false, autoAddRow:false}");
 
-        $("table", $fixture).cswritetable();
+        $("table", $fixture).writetable();
     }
     else {
         //initialize the plugin by passing in options explicitly
-        $("table", $fixture).cswritetable({
+        $("table", $fixture).writetable({
             tableName: 'players',
             enableAddRow:false,
             autoAddRow:false,
@@ -197,7 +197,7 @@ function testAddRow_with_addRow_off_autoAddRow_off(useMetadata) {
     equal( $("tr", $body).size(), 2, "Table should have 2 rows after initializing with autoAddRow off" );
     equal( $("tr.cs-writeable-editmode", $body).size(), 0, "None of the rows should start out in edit mode" );
 
-    $("table", $fixture).cswritetable('addRow');
+    $("table", $fixture).writetable('addRow');
 
     equal( $("tr", $body).size(), 2, "Table should still have 2 rows to after calling addRow() when addRow is disabled" );
     verifyNumberOfEditableRows(1);
@@ -210,10 +210,10 @@ function testRowSelected(useMetadata) {
 
     if(useMetadata) {
         $("table", $fixture).attr('data', "{tableName:'players', enableAddRow:true, autoAddRow:false}");
-        $("table", $fixture).cswritetable();
+        $("table", $fixture).writetable();
     }
     else {
-        $("table", $fixture).cswritetable({
+        $("table", $fixture).writetable({
             tableName: 'players',
             enableAddRow:true,
             autoAddRow:false,
@@ -248,7 +248,7 @@ function testRowSelected(useMetadata) {
     verifyNumberOfEditableRows(1);
 
     //add a row, but don't enter any values, then click away from it. The blank row should be removed
-    $("table", $fixture).cswritetable("addRow");
+    $("table", $fixture).writetable("addRow");
     equal( $("tr", $body).size(), 3, "Table should have 3 rows after call to addRow" );
     var row3 = $("tr", $body).last();
     verifyRow(row3, true);
@@ -258,7 +258,7 @@ function testRowSelected(useMetadata) {
     verifyNumberOfEditableRows(1);
 
     //add a row, then immediately click on it. Make sure the new row is not removed right from under you.
-    $("table", $fixture).cswritetable("addRow");
+    $("table", $fixture).writetable("addRow");
     equal( $("tr", $body).size(), 3, "Table should have 3 rows after call to addRow" );
     var row3 = $("tr", $body).last();
     verifyRow(row3, true);
